@@ -1,6 +1,6 @@
 {
   "name": "vscode-expose-ui",
-  "displayName": "vscode-expose-ui",
+  "displayName": "VSCode Expose UI",
   "description": "Expose VS Code UI values for external use",
   "version": "0.0.1",
   "engines": {
@@ -42,5 +42,5 @@
     "type": "git",
     "url": "https://github.com/cvladan/vscode-expose-ui.git"
   },
-  "publisher": "Colovic Vladan"
+  "publisher": "cvladan"
 }
