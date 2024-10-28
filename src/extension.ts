@@ -19,17 +19,32 @@ export function activate(context: vscode.ExtensionContext) {
 	// 	vscode.window.showInformationMessage('Hello World from vscode-expose-ui!');
 	// });
 	
-	const disposable = vscode.commands.registerCommand('extension.getVSCodeValue', (path: string) => {
+	const disposable = vscode.commands.registerCommand('extension.getGitInputValue', () => {
 		try {
-				return path.split('.').reduce((obj, key) => obj[key], vscode as any);
+			const value = vscode.extensions.getExtension('vscode.git')?.exports.getAPI(1).repositories[0].inputBox.value;
+			vscode.window.showInformationMessage(`Git Input Value: ${value}`);
+			return value;
 		} catch (error) {
-				console.error(`Failed to get value for path: ${path}`, error);
-				return undefined;
+			console.error(`Error getting Git input value: ${error}`);
+			return undefined;
 		}
 	});
-
+	
 	context.subscriptions.push(disposable);
 }
 
 // This method is called when your extension is deactivated
 export function deactivate() {}
+
+/*
+    const sourceControl = vscode.scm.getSourceControl('git');
+    if (sourceControl) {
+        // Clear the commit message input
+        sourceControl.inputBox.value = '';
+
+or     
+
+vscode.extensions.getExtension('vscode.git')?.exports.getAPI(1).repositories[0].inputBox.value
+
+maybe these are ways to get valueo of SCM field
+*/
